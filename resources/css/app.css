@@ -5,6 +5,9 @@
 * {
     @apply font-poppins text-slate-700;
 }
+[x-cloak] {
+    display: none !important;
+}
 ul li {
     @apply cursor-pointer text-slate-900;
 }
@@ -12,11 +15,38 @@ ul li:hover {
     @apply transition-colors text-orange-400;
 }
 form {
-    @apply w-full flex justify-center gap-3;
+    @apply w-full flex justify-center;
+}
+label {
+    @apply text-sm;
 }
 input {
-    @apply flex-grow bg-slate-200 p-3 py-2 text-slate-500 rounded-md outline-none;
+    @apply flex-grow bg-slate-100 p-3 py-2 text-slate-500 rounded-md outline-none text-sm;
 }
-button {
-    @apply text-white bg-orange-400 p-3 py-2 rounded-md;
+.error {
+    @apply text-xs border border-red-300 bg-red-100;
+}
+.errorMessage {
+    @apply text-xs text-red-500 italic;
+}
+.front button {
+    @apply text-white bg-orange-400 p-3 py-2 rounded-md mt-2;
+}
+.admin .header li {
+    @apply flex;
+}
+.admin .header li a {
+    @apply text-slate-500 py-2 px-1;
+}
+.admin li .activeLinks {
+    @apply text-slate-800 border-b-2 border-orange-400;
+}
+table thead th {
+    @apply p-3 text-gray-500 bg-slate-200 font-medium;
+}
+table tbody td {
+    @apply p-2 text-sm text-wrap break-words;
+}
+.topLinks ul li {
+    @apply text-sm p-2 text-gray-500;
 }
