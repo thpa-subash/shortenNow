@@ -16,6 +16,7 @@ class ShortenURLController extends Controller
     {
         return view('home');
     }
+
     public function store(CreateShortenUrl $createShortenUrl)
     {
         try {
@@ -26,17 +27,18 @@ class ShortenURLController extends Controller
             return back()->withErrors($exception->getMessage());
         }
     }
+
     public function redirectToOrginalUrl($url)
     {
-        $cacheData = Cache::set("red", "asdf");
         $shortURL = $this->urlService->findOrFailByShortCode($url);
         if (!$shortURL) {
             abort('404', 'URL not found');
         }
-        // dd(isset($shortURL->deleted_at));
         if (isset($shortURL->deleted_at) || (isset($shortURL->expires_at) && $this->urlService->checkURLExpires($shortURL->id))) {
             abort(410, 'This shortened URL has been deleted');
         }
+        // use withoutTimestamps
+        $shortURL->increment('no_of_clicks');
         return redirect()->to($shortURL->original_url, 302);
     }
 }

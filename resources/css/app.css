@@ -8,10 +8,10 @@
 [x-cloak] {
     display: none !important;
 }
-ul li {
+header ul li {
     @apply cursor-pointer text-slate-900;
 }
-ul li:hover {
+header ul li:hover {
     @apply transition-colors text-orange-400;
 }
 form {
@@ -49,4 +49,7 @@ table tbody td {
 }
 .topLinks ul li {
     @apply text-sm p-2 text-gray-500;
+}
+article h3 {
+    @apply text-xl;
 }

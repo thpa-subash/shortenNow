@@ -7,7 +7,7 @@
                     <li>Features</li>
                     <li>Pricing</li>
                     <li>Blog</li>
-                    <li>Docs</li>
+                    <li><a href="{{ route('docs') }}">Docs</a></li>
                 </ul>
             </nav>
             <div class="relative border border-slate-200 rounded-full p-2" x-data="{ open: false }">
@@ -24,7 +24,7 @@
                     <ul class="divide-y">
                         @auth
                             <li>
-                                <a class="flex items-center gap-2 px-3 py-2">
+                                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-3 py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
                                             stroke-linejoin="round" stroke-width="2"
@@ -34,12 +34,13 @@
                         @endauth
                         @auth
                             <li>
-                                <a class="flex text-nowrap items-center gap-2 px-3 py-2">
+                                <a href="{{ route('admin.shortUrl') }}"
+                                    class="flex text-nowrap items-center gap-2 px-3 py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
                                             stroke-linejoin="round" stroke-width="2"
                                             d="M16 7a4 4 0 1 1-8 0a4 4 0 0 1 8 0m-4 7a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7" />
-                                    </svg>My Account</a>
+                                    </svg>My Url</a>
                             </li>
                         @endauth
                         @guest

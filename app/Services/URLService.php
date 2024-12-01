@@ -9,9 +9,9 @@ class URLService
 {
     public function getAllURL($searchQuery, $paginateBy = 10,)
     {
-        return URL::withTrashed()->select('id', 'original_url', 'short_code', 'expires_at', 'deleted_at')
+        return URL::withTrashed()->select('id', 'original_url', 'no_of_clicks', 'short_code', 'expires_at', 'deleted_at')
             ->when(isset($searchQuery), function ($query) use ($searchQuery) {
-                $query->where('short_code', 'like', '%' . $searchQuery . '%');
+                $query->where('original_url', 'like', '%' . $searchQuery . '%');
             })
             ->latest()
             ->paginate($paginateBy);

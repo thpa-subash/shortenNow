@@ -19,6 +19,7 @@
                 <th class="w-36">Short Code</th>
                 <th>Original URL</th>
                 <th>Expires At</th>
+                <th>Total Clicks</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -30,6 +31,7 @@
                     <td>{{ $shortUrl->short_code }}</td>
                     <td>{{ $shortUrl->original_url }}</td>
                     <td>{{ $shortUrl->expires_at }}</td>
+                    <td>{{ $shortUrl->no_of_clicks }}</td>
                     <td>
                         @if (isset($shortUrl->deleted_at))
                             <span class="text-red-500 text-xs bg-red-100 px-5 py-1 rounded-sm">Deleted</span>
@@ -56,7 +58,7 @@
         </tbody>
     </table>
     @if ($shortUrls->isNotEmpty() && $shortUrls->hasPages())
-        <div class="border bg-white px-4 py-2 rounded-lg text-red-900">
+        <div class=" bg-white px-4 py-2 rounded-lg text-red-900">
             {{ $shortUrls->links() }}
         </div>
     @endif

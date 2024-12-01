@@ -14,7 +14,7 @@
                 </svg>
             </div>
             <div>
-                <h3 class="text-lg font-bold">300</h3>
+                <h3 class="text-lg font-bold">{{ $totalUser ?? 0 }}</h3>
                 <p>Total Users</p>
             </div>
         </div>
@@ -29,7 +29,7 @@
                 </svg>
             </div>
             <div>
-                <h3 class="text-lg font-bold">450</h3>
+                <h3 class="text-lg font-bold">{{ $totalURL ?? 0 }}</h3>
                 <p>Total URL</p>
             </div>
         </div>
@@ -55,22 +55,30 @@
             <table class="w-full table-fixed text-left bg-white border rounded-lg overflow-hidden">
                 <thead class="">
                     <tr class="p-2">
-                        <th>Short Code</th>
-                        <th>Original URL</th>
-                        <th>Short URL</th>
+                        <th class="w-20">Short Code</th>
+                        <th>Short Link</th>
+                        <th>Expires At</th>
+                        <th class="text-nowrap">Total Clicks</th>
+                        <th>Created At</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
-                    <tr class="p-2">
-                        <td>Short Code</td>
-                        <td>Original URL</td>
-                        <td>Short URL</td>
-                    </tr>
-                    <tr class="p-2">
-                        <td>Short Code</td>
-                        <td>Original URL</td>
-                        <td>Short URL</td>
-                    </tr>
+                    @forelse($latestURLs as $latestURL)
+                        <tr class="p-2">
+                            <td>{{ $latestURL->short_code }}</td>
+                            <td class="text-wrap"><a class="underline" target="_blank"
+                                    href="{{ route('redirectUrlTo', $latestURL->short_code) }}">{{ route('redirectUrlTo', $latestURL->short_code) }}</a>
+                            </td>
+                            <td>{{ $latestURL->expires_at }}</td>
+                            <td>{{ $latestURL->no_of_clicks }}</td>
+                            <td>{{ $latestURL->created_at->diffForHumans() }}</td>
+                        </tr>
+
+                    @empty
+                        <tr>
+                            <td>Not data found</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -80,10 +88,14 @@
             </div>
             <div>
                 <ul class="divide-y divide-slate-100">
-                    <li><a>https://shikshasanjal.com</a></li>
-                    <li><a>https://shikshasanjal.com</a></li>
-                    <li><a>https://shikshasanjal.com</a></li>
-                    <li><a>https://shikshasanjal.com</a></li>
+                    @forelse($topURLs as $topURL)
+                        <li class="flex justify-between"><a
+                                href="{{ route('redirectUrlTo', $topURL->short_code) }}">{{ route('redirectUrlTo', $topURL->short_code) }}</a>
+                            <span>{{ $topURL->no_of_clicks }}</span>
+                        </li>
+                    @empty
+                        <li>URLs not found</li>
+                    @endforelse
                 </ul>
             </div>
         </div>
